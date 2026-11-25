@@ -1,0 +1,117 @@
+// Spectre Netlist: 2023 3D INCA 8x8 Array - Ta2O5 (VOLTAGE MEASUREMENT)
+// Architecture: Kim et al. (HPCA 2023) 2T1R Input-Stationary Dataflow
+// Baseline Node: FreePDK 45nm CMOS | Workload: 3x3 Spatial Gated Conv Window
+
+simulator lang=spectre
+global 0
+
+include "$FREEPDK45_DIR/ncsu_basekit/models/hspice/tran_models/models_nom/NMOS_VTG.inc"
+include "../../cells/inca_2t1r_cell_ta2o5.scs"
+
+// 8x8 INCA Subarray Macro (Ta2O5)
+subckt inca_8x8_array ( p0 p1 p2 p3 p4 p5 p6 p7 r0 r1 r2 r3 r4 r5 r6 r7 c0 c1 c2 c3 c4 c5 c6 c7 plane_out gnd_ref )
+	Xcell_0_0 ( p0 r0 c0 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_0_1 ( p1 r0 c1 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_0_2 ( p2 r0 c2 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_0_3 ( p3 r0 c3 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_0_4 ( p4 r0 c4 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_0_5 ( p5 r0 c5 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_0_6 ( p6 r0 c6 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_0_7 ( p7 r0 c7 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_1_0 ( p0 r1 c0 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_1_1 ( p1 r1 c1 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_1_2 ( p2 r1 c2 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_1_3 ( p3 r1 c3 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_1_4 ( p4 r1 c4 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_1_5 ( p5 r1 c5 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_1_6 ( p6 r1 c6 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_1_7 ( p7 r1 c7 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_2_0 ( p0 r2 c0 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_2_1 ( p1 r2 c1 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_2_2 ( p2 r2 c2 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_2_3 ( p3 r2 c3 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_2_4 ( p4 r2 c4 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_2_5 ( p5 r2 c5 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_2_6 ( p6 r2 c6 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_2_7 ( p7 r2 c7 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_3_0 ( p0 r3 c0 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_3_1 ( p1 r3 c1 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_3_2 ( p2 r3 c2 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_3_3 ( p3 r3 c3 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_3_4 ( p4 r3 c4 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_3_5 ( p5 r3 c5 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_3_6 ( p6 r3 c6 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_3_7 ( p7 r3 c7 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_4_0 ( p0 r4 c0 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_4_1 ( p1 r4 c1 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_4_2 ( p2 r4 c2 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_4_3 ( p3 r4 c3 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_4_4 ( p4 r4 c4 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_4_5 ( p5 r4 c5 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_4_6 ( p6 r4 c6 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_4_7 ( p7 r4 c7 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_5_0 ( p0 r5 c0 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_5_1 ( p1 r5 c1 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_5_2 ( p2 r5 c2 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_5_3 ( p3 r5 c3 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_5_4 ( p4 r5 c4 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_5_5 ( p5 r5 c5 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_5_6 ( p6 r5 c6 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_5_7 ( p7 r5 c7 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_6_0 ( p0 r6 c0 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_6_1 ( p1 r6 c1 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_6_2 ( p2 r6 c2 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_6_3 ( p3 r6 c3 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_6_4 ( p4 r6 c4 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_6_5 ( p5 r6 c5 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_6_6 ( p6 r6 c6 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_6_7 ( p7 r6 c7 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_7_0 ( p0 r7 c0 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_7_1 ( p1 r7 c1 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_7_2 ( p2 r7 c2 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_7_3 ( p3 r7 c3 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_7_4 ( p4 r7 c4 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_7_5 ( p5 r7 c5 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_7_6 ( p6 r7 c6 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+	Xcell_7_7 ( p7 r7 c7 plane_out gnd_ref ) inca_2t1r_cell_ta2o5 x0=1.0
+ends inca_8x8_array
+
+// 3x3 Window Inputs (P0..P2 Driven, P3..P7 Grounded)
+Vp0 (p0 0) vsource type=pulse val0=0 val1=0.5 period=100n delay=70n rise=1n fall=1n width=10n
+Vp1 (p1 0) vsource type=pulse val0=0 val1=0.5 period=100n delay=70n rise=1n fall=1n width=10n
+Vp2 (p2 0) vsource type=pulse val0=0 val1=0.5 period=100n delay=70n rise=1n fall=1n width=10n
+Vp3 (p3 0) vsource type=dc dc=0
+Vp4 (p4 0) vsource type=dc dc=0
+Vp5 (p5 0) vsource type=dc dc=0
+Vp6 (p6 0) vsource type=dc dc=0
+Vp7 (p7 0) vsource type=dc dc=0
+
+// Row Select Gates (TR1)
+Vr0 (r0 0) vsource type=dc dc=1.1
+Vr1 (r1 0) vsource type=dc dc=1.1
+Vr2 (r2 0) vsource type=dc dc=1.1
+Vr3 (r3 0) vsource type=dc dc=0.0
+Vr4 (r4 0) vsource type=dc dc=0.0
+Vr5 (r5 0) vsource type=dc dc=0.0
+Vr6 (r6 0) vsource type=dc dc=0.0
+Vr7 (r7 0) vsource type=dc dc=0.0
+
+// Col Select Gates (TR2)
+Vc0 (c0 0) vsource type=dc dc=1.1
+Vc1 (c1 0) vsource type=dc dc=1.1
+Vc2 (c2 0) vsource type=dc dc=1.1
+Vc3 (c3 0) vsource type=dc dc=0.0
+Vc4 (c4 0) vsource type=dc dc=0.0
+Vc5 (c5 0) vsource type=dc dc=0.0
+Vc6 (c6 0) vsource type=dc dc=0.0
+Vc7 (c7 0) vsource type=dc dc=0.0
+
+// Shared Collection Plane Resistor Load
+Rload (plane_out 0) resistor r=1.0
+
+// Instantiate Macro
+Xmacro ( p0 p1 p2 p3 p4 p5 p6 p7 r0 r1 r2 r3 r4 r5 r6 r7 c0 c1 c2 c3 c4 c5 c6 c7 plane_out 0 ) inca_8x8_array
+
+tran_analysis tran stop=120n errpreset=moderate
+saveOptions options rawfmt=psfascii
+save plane_out p0 p1 p2 p3 p4 r0 r1 r2 r3 c0 c1 c2 c3 Xmacro.Xcell_0_0.n1 Xmacro.Xcell_0_0.n2

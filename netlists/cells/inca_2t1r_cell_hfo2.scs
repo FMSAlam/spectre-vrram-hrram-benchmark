@@ -1,0 +1,20 @@
+// ====================================================================
+// INCA 2T1R Direct-Convolution Cell Subcircuit - HfO2 Variant
+// Architecture: Kim et al. (HPCA 2023) | Material: HfO2
+// ====================================================================
+simulator lang=spectre
+
+ahdl_include "../../veriloga/memristor_hfo2.va"
+
+subckt inca_2t1r_cell_hfo2 (input_pillar row_sel col_sel plane_out gnd)
+    parameters x0=0.3
+
+    // 1. HfO2 Memristor element between Input Pillar and internal node 'n1'
+    Xmem (input_pillar n1) memristor_hfo2 x0=x0
+
+    // 2. Transistor 1: Row-wise gating switch (TR1)
+    M1 (n1 row_sel n2 gnd) NMOS_VTG w=240n l=45n
+
+    // 3. Transistor 2: Column-wise gating switch (TR2)
+    M2 (n2 col_sel plane_out gnd) NMOS_VTG w=240n l=45n
+ends inca_2t1r_cell_hfo2

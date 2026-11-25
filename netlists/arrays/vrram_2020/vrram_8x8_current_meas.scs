@@ -1,0 +1,128 @@
+// Spectre Netlist: 2020 3D VRRAM 8x8 Iso-Scale Array (CURRENT MEASUREMENT)
+// Architecture: Kim & Li (ISVLSI 2020) 2R + Bottom-Select Transistor Architecture
+// Baseline PDK: FreePDK 45nm CMOS
+
+simulator lang=spectre
+global 0
+
+include "$FREEPDK45_DIR/ncsu_basekit/models/hspice/tran_models/models_nom/NMOS_VTG.inc"
+include "../../cells/vrram_2r_pillar_ta2o5.scs"
+
+// Define 8x8 2R + Bottom-Select VRRAM Subarray
+subckt vrram_8x8_array ( bl0 bl1 bl2 bl3 bl4 bl5 bl6 bl7 sl0 sl1 sl2 sl3 sl4 sl5 sl6 sl7 wl_even0 wl_odd0 gnd_ref )
+    // Row 0 (Active Select Line sl0 = 1.1V)
+    Xp_0_0 (wl_even0 wl_odd0 p_0_0 sl0 bl0 gnd_ref) vrram_pillar x0_even=1.0 x0_odd=0.0
+    Xp_0_1 (wl_even0 wl_odd0 p_0_1 sl1 bl1 gnd_ref) vrram_pillar x0_even=1.0 x0_odd=0.0
+    Xp_0_2 (wl_even0 wl_odd0 p_0_2 sl2 bl2 gnd_ref) vrram_pillar x0_even=1.0 x0_odd=0.0
+    Xp_0_3 (wl_even0 wl_odd0 p_0_3 sl3 bl3 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_0_4 (wl_even0 wl_odd0 p_0_4 sl4 bl4 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_0_5 (wl_even0 wl_odd0 p_0_5 sl5 bl5 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_0_6 (wl_even0 wl_odd0 p_0_6 sl6 bl6 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_0_7 (wl_even0 wl_odd0 p_0_7 sl7 bl7 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+
+    // Row 1 (Active Select Line sl1 = 1.1V)
+    Xp_1_0 (wl_even0 wl_odd0 p_1_0 sl0 bl0 gnd_ref) vrram_pillar x0_even=1.0 x0_odd=0.0
+    Xp_1_1 (wl_even0 wl_odd0 p_1_1 sl1 bl1 gnd_ref) vrram_pillar x0_even=1.0 x0_odd=0.0
+    Xp_1_2 (wl_even0 wl_odd0 p_1_2 sl2 bl2 gnd_ref) vrram_pillar x0_even=1.0 x0_odd=0.0
+    Xp_1_3 (wl_even0 wl_odd0 p_1_3 sl3 bl3 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_1_4 (wl_even0 wl_odd0 p_1_4 sl4 bl4 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_1_5 (wl_even0 wl_odd0 p_1_5 sl5 bl5 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_1_6 (wl_even0 wl_odd0 p_1_6 sl6 bl6 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_1_7 (wl_even0 wl_odd0 p_1_7 sl7 bl7 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+
+    // Row 2 (Active Select Line sl2 = 1.1V)
+    Xp_2_0 (wl_even0 wl_odd0 p_2_0 sl0 bl0 gnd_ref) vrram_pillar x0_even=1.0 x0_odd=0.0
+    Xp_2_1 (wl_even0 wl_odd0 p_2_1 sl1 bl1 gnd_ref) vrram_pillar x0_even=1.0 x0_odd=0.0
+    Xp_2_2 (wl_even0 wl_odd0 p_2_2 sl2 bl2 gnd_ref) vrram_pillar x0_even=1.0 x0_odd=0.0
+    Xp_2_3 (wl_even0 wl_odd0 p_2_3 sl3 bl3 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_2_4 (wl_even0 wl_odd0 p_2_4 sl4 bl4 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_2_5 (wl_even0 wl_odd0 p_2_5 sl5 bl5 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_2_6 (wl_even0 wl_odd0 p_2_6 sl6 bl6 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_2_7 (wl_even0 wl_odd0 p_2_7 sl7 bl7 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+
+    // Row 3 (Unselected Select Line sl3 = 0.0V)
+    Xp_3_0 (wl_even0 wl_odd0 p_3_0 sl0 bl0 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_3_1 (wl_even0 wl_odd0 p_3_1 sl1 bl1 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_3_2 (wl_even0 wl_odd0 p_3_2 sl2 bl2 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_3_3 (wl_even0 wl_odd0 p_3_3 sl3 bl3 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_3_4 (wl_even0 wl_odd0 p_3_4 sl4 bl4 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_3_5 (wl_even0 wl_odd0 p_3_5 sl5 bl5 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_3_6 (wl_even0 wl_odd0 p_3_6 sl6 bl6 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_3_7 (wl_even0 wl_odd0 p_3_7 sl7 bl7 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+
+    // Row 4
+    Xp_4_0 (wl_even0 wl_odd0 p_4_0 sl0 bl0 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_4_1 (wl_even0 wl_odd0 p_4_1 sl1 bl1 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_4_2 (wl_even0 wl_odd0 p_4_2 sl2 bl2 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_4_3 (wl_even0 wl_odd0 p_4_3 sl3 bl3 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_4_4 (wl_even0 wl_odd0 p_4_4 sl4 bl4 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_4_5 (wl_even0 wl_odd0 p_4_5 sl5 bl5 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_4_6 (wl_even0 wl_odd0 p_4_6 sl6 bl6 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_4_7 (wl_even0 wl_odd0 p_4_7 sl7 bl7 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+
+    // Row 5
+    Xp_5_0 (wl_even0 wl_odd0 p_5_0 sl0 bl0 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_5_1 (wl_even0 wl_odd0 p_5_1 sl1 bl1 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_5_2 (wl_even0 wl_odd0 p_5_2 sl2 bl2 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_5_3 (wl_even0 wl_odd0 p_5_3 sl3 bl3 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_5_4 (wl_even0 wl_odd0 p_5_4 sl4 bl4 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_5_5 (wl_even0 wl_odd0 p_5_5 sl5 bl5 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_5_6 (wl_even0 wl_odd0 p_5_6 sl6 bl6 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_5_7 (wl_even0 wl_odd0 p_5_7 sl7 bl7 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+
+    // Row 6
+    Xp_6_0 (wl_even0 wl_odd0 p_6_0 sl0 bl0 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_6_1 (wl_even0 wl_odd0 p_6_1 sl1 bl1 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_6_2 (wl_even0 wl_odd0 p_6_2 sl2 bl2 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_6_3 (wl_even0 wl_odd0 p_6_3 sl3 bl3 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_6_4 (wl_even0 wl_odd0 p_6_4 sl4 bl4 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_6_5 (wl_even0 wl_odd0 p_6_5 sl5 bl5 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_6_6 (wl_even0 wl_odd0 p_6_6 sl6 bl6 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_6_7 (wl_even0 wl_odd0 p_6_7 sl7 bl7 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+
+    // Row 7
+    Xp_7_0 (wl_even0 wl_odd0 p_7_0 sl0 bl0 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_7_1 (wl_even0 wl_odd0 p_7_1 sl1 bl1 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_7_2 (wl_even0 wl_odd0 p_7_2 sl2 bl2 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_7_3 (wl_even0 wl_odd0 p_7_3 sl3 bl3 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_7_4 (wl_even0 wl_odd0 p_7_4 sl4 bl4 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_7_5 (wl_even0 wl_odd0 p_7_5 sl5 bl5 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_7_6 (wl_even0 wl_odd0 p_7_6 sl6 bl6 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+    Xp_7_7 (wl_even0 wl_odd0 p_7_7 sl7 bl7 gnd_ref) vrram_pillar x0_even=0.3 x0_odd=0.3
+ends vrram_8x8_array
+
+// --- INPUT & CONTROL STIMULI ---
+// Bit Line Drivers: 3x3 Active Window (BL0..BL2 @ 0.5V Read Pulse)
+Vbl0 (drive_bl0 0) vsource type=pulse val0=0 val1=0.5 period=100n delay=70n rise=1n fall=1n width=10n
+Vprb0 (drive_bl0 bl0) vsource type=dc dc=0
+Vbl1 (bl1 0) vsource type=pulse val0=0 val1=0.5 period=100n delay=70n rise=1n fall=1n width=10n
+Vbl2 (bl2 0) vsource type=pulse val0=0 val1=0.5 period=100n delay=70n rise=1n fall=1n width=10n
+
+// Unselected Bit Lines (BL3..BL7 @ 0V)
+Vbl3 (bl3 0) vsource type=dc dc=0
+Vbl4 (bl4 0) vsource type=dc dc=0
+Vbl5 (bl5 0) vsource type=dc dc=0
+Vbl6 (bl6 0) vsource type=dc dc=0
+Vbl7 (bl7 0) vsource type=dc dc=0
+
+// Select Line Gates: Active (SL0..SL2 @ 1.1V ON), Unselected (SL3..SL7 @ 0.0V OFF)
+Vsl0 (sl0 0) vsource type=dc dc=1.1
+Vsl1 (sl1 0) vsource type=dc dc=1.1
+Vsl2 (sl2 0) vsource type=dc dc=1.1
+Vsl3 (sl3 0) vsource type=dc dc=0.0
+Vsl4 (sl4 0) vsource type=dc dc=0.0
+Vsl5 (sl5 0) vsource type=dc dc=0.0
+Vsl6 (sl6 0) vsource type=dc dc=0.0
+Vsl7 (sl7 0) vsource type=dc dc=0.0
+
+// Word Line Planes (Sense Terminals)
+V_wl_even (wl_even0 0) vsource type=dc dc=0
+V_wl_odd (wl_odd0 0) vsource type=dc dc=0
+
+// Instantiate 8x8 Array Macro
+Xarray ( bl0 bl1 bl2 bl3 bl4 bl5 bl6 bl7 sl0 sl1 sl2 sl3 sl4 sl5 sl6 sl7 wl_even0 wl_odd0 0 ) vrram_8x8_array
+
+// Simulation Controls
+tran_analysis tran stop=120n errpreset=moderate
+saveOptions options rawfmt=psfascii
+save Vprb0:p Vbl1:p Vbl2:p Vbl3:p Vbl4:p V_wl_even:p V_wl_odd:p

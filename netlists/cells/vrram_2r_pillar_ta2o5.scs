@@ -1,0 +1,20 @@
+// ====================================================================
+// 3D VRRAM Vertical Pillar Subcircuit (2R Dual-Cell + Bottom-Select NMOS)
+// Architecture: Kim & Li (ISVLSI 2020) | Material: Ta2O5
+// ====================================================================
+simulator lang=spectre
+
+ahdl_include "../../veriloga/memristor_ta2o5.va"
+
+subckt vrram_pillar (wl_even wl_odd pillar sl bl gnd)
+    parameters x0_even=0.3 x0_odd=0.3
+
+    // Positive Weight Cell: Even WL to Vertical Pillar
+    Xmem_p (wl_even pillar) memristor_ta2o5 x0=x0_even
+
+    // Negative Weight Cell: Odd WL to Vertical Pillar
+    Xmem_n (wl_odd pillar) memristor_ta2o5 x0=x0_odd
+
+    // Shared Bottom Pillar-Select Transistor (Drain=pillar, Gate=sl, Source=bl, Bulk=gnd)
+    Mselect (pillar sl bl gnd) NMOS_VTG w=240n l=45n
+ends vrram_pillar

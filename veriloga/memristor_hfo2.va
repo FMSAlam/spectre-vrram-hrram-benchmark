@@ -1,0 +1,81 @@
+// Verilog-A Compact Model: Generalized Yakopcic HfO2 Memristor
+// Parameters based on Mbarek et al. (2019) / Woo et al. (2017)
+`include "constants.vams"
+`include "disciplines.vams"
+
+module memristor_hfo2 (p, n);
+	inout p, n;
+	electrical p, n;
+
+	// Device Parameters for HfO2 Memristor (Mbarek et al. 2019)
+	parameter real a1 = 3.12; // Positive current amplitude scaling factor
+	parameter real a2 = 2.50; // Negative current amplitude scaling factor
+	parameter real b = 5.0e-5; // Nonlinearity coefficient
+	parameter real Vp = 1.80; // Positive programming threshold voltage [V]
+	parameter real Vn = 1.00; // Negative programming threshold voltage [V]
+	parameter real Ap = 1.0e4; // Positive state change rate
+	parameter real An = 1.0e6; // Negative state change rate
+	parameter real xp = 0.50; // Positive state boundary threshold
+	parameter real xn = 0.50; // Negative state boundary threshold
+	parameter real alphap = 0.5; // Positive motion decay factor
+	parameter real alphan = 9.0; // Negative motion decay factor
+	parameter real x0 = 0.1; // Initial state variable (0 = HRS, 1 = LRS)
+	parameter real i_comp = 5.0e-4; // Compliance current limit [A] (500 uA)
+
+	real v_val, i_val, x, dxdt, gV, fx, wp, wn;
+
+	analog begin
+		// 1. Voltage drop across top (p) and bottom (n) electrodes
+		v_val = V(p, n);
+
+		// 2. Calculate Threshold Function g(V)
+		if (v_val > Vp)
+			gV = Ap * (limexp(v_val) - limexp(Vp));
+		else if (v_val < -Vn)
+			gV = -An * (limexp(-v_val) - limexp(Vn));
+		else
+			gV = 0.0;
+
+		// 3. Calculate Window Function f(x)
+		if (v_val >= 0.0) begin
+			if (x >= xp) begin
+				wp = (xp - x) / (1.0 - xp) + 1.0;
+				fx = limexp(-alphap * (x - xp)) * wp;
+			end else begin
+				fx = 1.0;
+			end
+		end else begin
+			if (x <= (1.0 - xn)) begin
+				wn = x / (1.0 - xn);
+				fx = limexp(alphan * (x + xn - 1.0)) * wn;
+			end else begin
+				fx = 1.0;
+			end
+		end
+
+		// 4. State variable derivative dx/dt
+		dxdt = gV * fx;
+
+		// Enforce boundaries by gating the derivative
+		if (x >= 1.0 && dxdt > 0.0) dxdt = 0.0;
+		if (x <= 0.0 && dxdt < 0.0) dxdt = 0.0;
+
+		// 5. Integrate state derivative to get state variable x
+		x = idt(dxdt, x0);
+
+		// 6. Compute Current I(t) based on hyperbolic sine transport
+		if (v_val >= 0.0)
+			i_val = a1 * x * sinh(b * v_val);
+		else
+			i_val = a2 * x * sinh(b * v_val);
+
+		// Enforce Compliance Current Limit (saturate at +/- Icomp)
+		if (i_val > i_comp)
+			i_val = i_comp;
+		else if (i_val < -i_comp)
+			i_val = -i_comp;
+
+		// 7. Assign branch current
+		I(p, n) <+ i_val;
+	end
+endmodule
